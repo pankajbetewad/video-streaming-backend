@@ -154,8 +154,8 @@ const logoutUser = asynchandler(async (req, res) => {
   await User.findByIdAndUpdate(
     req.user._id,
     {
-      $set: {
-        refreshToken: undefined
+      $unset: {
+        refreshToken: 1
       }
     },
     {
@@ -415,7 +415,7 @@ const getWatchHistory = asynchandler(async (req, res) => {
 
   return res
     .status(200)
-    .json(200, new ApiResponse(200, user[0].watchhisstory, "watch history fetched successfully"))
+    .json(200, new ApiResponse(200, user[0].watchhistory, "watch history fetched successfully"))
 })
 
 
